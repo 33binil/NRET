@@ -122,7 +122,7 @@ const Navbar = () => {
                 Login
               </Link>
               <Link 
-                to="/signup" 
+                to="/register"
                 className="bg-blue-600 text-white hover:bg-blue-700 px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm md:text-base font-medium transition-colors duration-200"
                 onClick={() => setIsOpen(false)}
               >
@@ -182,7 +182,7 @@ const Navbar = () => {
                 Login
               </Link>
               <Link 
-                to="/signup" 
+                to="/register"
                 className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:shadow-sm whitespace-nowrap"
                 onClick={() => setIsOpen(false)}
               >
@@ -292,7 +292,7 @@ const Navbar = () => {
                   Login
                 </Link>
                 <Link
-                  to="/signup"
+                  to="/register"
                   onClick={() => setIsOpen(false)}
                   className="text-center bg-blue-600 text-white hover:bg-blue-700 px-4 py-2.5 rounded-md text-sm font-medium transition-colors duration-200"
                 >
