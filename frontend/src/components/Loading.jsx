@@ -51,7 +51,7 @@ const Loading = () => {
         </div>
         <div className="space-y-4 text-center max-w-md w-full">
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 animate-pulse">
-            Loading Amazing Content...
+            Welcome to Nano Robotics & Embed Technologies..
           </h1>
           <div className="flex justify-center space-x-2">
             <div className="w-2 h-2 sm:w-3 sm:h-3 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>

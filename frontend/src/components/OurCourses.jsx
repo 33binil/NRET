@@ -1,47 +1,65 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// Internship data - Will be moved to a database/API later for admin panel
-const internships = [
+// Course data - Will be moved to a database/API later for admin panel
+const courses = [
     {
         id: 1,
         title: 'Full Stack Web Development',
-        description: 'Learn to build dynamic and responsive web applications using MERN or Python-Django stack. Work on real-world projects from frontend to backend.',
-        image: '/internships/fullstack.png',
+        description: 'Master modern web development with MERN stack (MongoDB, Express, React, Node.js) and build real-world applications.',
+        duration: '12 weeks',
+        level: 'Beginner to Advanced',
+        price: '₹12,999',
+        image: '/fullstack-interface.png'
     },
     {
         id: 2,
-        title: 'Artificial Intelligence & ML',
-        description: 'Gain hands-on experience in AI and ML algorithms, data preprocessing, and model training using Python libraries like TensorFlow and Scikit-learn.',
-        image: '/internships/ai.png'
+        title: 'Data Science & ML',
+        description: 'Learn data analysis, visualization, and machine learning algorithms using Python, Pandas, and Scikit-learn.',
+        duration: '16 weeks',
+        level: 'Intermediate',
+        price: '₹14,999',
+        image: '/datascience-interface.png'
     },
     {
         id: 3,
         title: 'Mobile App Development',
-        description: 'Develop Android and iOS apps using React Native or Flutter, focusing on UI design, API integration, and performance optimization.',
-        image: '/internships/appdevelop.png'
+        description: 'Build cross-platform mobile applications using React Native or Flutter with Firebase backend integration.',
+        duration: '10 weeks',
+        level: 'Beginner',
+        price: '₹10,999',
+        image: '/mobileapp-interface.png'
     },
     {
         id: 4,
-        title: 'Cybersecurity & Ethical Hacking',
-        description: 'Understand system vulnerabilities, perform penetration testing, and learn practical methods to protect networks and applications.',
-        image: '/internships/data.png'
+        title: 'Python Programming',
+        description: 'Master Python programming from basics to advanced concepts, including OOP, data structures, and algorithms.',
+        duration: '8 weeks',
+        level: 'Beginner',
+        price: '₹8,999',
+        image: '/python-interface.png'
     },
     {
         id: 5,
-        title: 'Embedded Systems & IoT',
-        description: 'Work with microcontrollers, sensors, and IoT protocols to build smart hardware projects and automation systems.',
-        image: '/internships/embed.png'
+        title: 'UI/UX Design',
+        description: 'Learn user interface and experience design principles, tools like Figma, and create stunning designs.',
+        duration: '10 weeks',
+        level: 'Beginner to Intermediate',
+        price: '₹11,999',
+        image: '/uiux-interface.png'
     },
     {
         id: 6,
-        title: 'Cloud Computing',
-        description: 'Deploy and manage applications on cloud platforms, using Docker, CI/CD pipelines, and scalable infrastructure tools.',
-        image: '/internships/cloud.png'
+        title: 'Ethical Hacking',
+        description: 'Learn penetration testing, vulnerability assessment, and security best practices to protect systems from cyber threats.',
+        duration: '16 weeks',
+        level: 'Advanced',
+        price: '₹18,999',
+        image: '/ethicalhacking-interface.png'
     }
 ];
 
-const Internships = () => {
+const OurCourses = () => {
     return (
         <div className="min-h-screen bg-[#f5f5f0] font-sans">
             {/* Top Bar */}
@@ -85,7 +103,7 @@ const Internships = () => {
                 <div 
                     className="absolute inset-0 bg-cover bg-center"
                     style={{
-                        backgroundImage: 'url(/internshiphead.png)',
+                        backgroundImage: 'url(/ourcourses.jpg)',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                         backgroundRepeat: 'no-repeat',
@@ -96,14 +114,14 @@ const Internships = () => {
                 </div>
                 <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto font-['AFACAD']">
                     <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 xs:mb-4 sm:mb-5 md:mb-6">
-                        Real-World Internship Programs
+                        Our Professional Courses
                     </h1>
                     <p className="text-white text-xs xs:text-sm sm:text-base lg:text-lg max-w-2xl sm:max-w-3xl mx-auto leading-relaxed px-2">
-                        Gain hands-on experience through our industry-focused internships designed to bridge the gap between academics and real-world applications. 
+                        Explore our comprehensive range of courses designed to equip you with in-demand skills for the digital age.
                         <span className="hidden xs:inline">
-                            Work on live projects, learn from professionals, and build a strong foundation for your career.
+                            Learn from industry experts and gain practical knowledge to advance your career.
                         </span>
-                        <span className="xs:hidden">Work on live projects with industry experts.</span>
+                        <span className="xs:hidden">Learn from industry experts.</span>
                     </p>
                 </div>
             </div>
@@ -111,32 +129,33 @@ const Internships = () => {
             {/* Main Content */}
             <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
                 
-                {/* Internship Grid */}
+                {/* Course Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 px-2 sm:px-0">
-                    {internships.map((internship) => (
-                        <div key={internship.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                            {/* Internship Image */}
+                    {courses.map((course) => (
+                        <div key={course.id} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                            {/* Course Image */}
                             <div className="w-full h-40 sm:h-48 md:h-56 lg:h-64 overflow-hidden">
                                 <img 
-                                    src={internship.image} 
-                                    alt={internship.title}
+                                    src={course.image} 
+                                    alt={course.title}
                                     className="w-full h-full object-cover"
                                     onError={(e) => {
                                         e.target.onerror = null;
-                                        e.target.src = '/internship-placeholder.jpg';
+                                        e.target.src = '/placeholder-course.png';
                                     }}
                                 />
                             </div>
                             
                             {/* Content */}
                             <div className="p-4 sm:p-5 md:p-6">
-                                <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 line-clamp-2">{internship.title}</h2>
-                                <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-3">{internship.description}</p>
-                                
-                                <div className="mt-4">
+                                <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 line-clamp-2">{course.title}</h2>
+                                <p className="text-sm sm:text-base text-gray-600 mb-2 line-clamp-2">{course.description}</p>
+                                <p className="text-sm text-gray-500 mb-3">{course.duration} • {course.level}</p>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-blue-600 font-medium">{course.price}</span>
                                     <Link 
-                                        to={`/internships/${internship.id}`}
-                                        className="block w-full text-center py-1.5 sm:py-2 px-3 sm:px-4 border border-gray-300 rounded-lg text-sm sm:text-base text-gray-700 hover:bg-gray-50 transition-colors"
+                                        to={`/course-details/${course.id}`}
+                                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
                                     >
                                         View Details
                                     </Link>
@@ -157,4 +176,4 @@ const Internships = () => {
     );
 };
 
-export default Internships;
+export default OurCourses;

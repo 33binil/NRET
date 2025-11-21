@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import { FaChalkboardTeacher, FaGraduationCap } from 'react-icons/fa';
 import animationData from '../animations/1760540193944.json';
@@ -6,6 +7,11 @@ import Bottom from './Bottom';
 
 
 const Home = () => {
+  const navigate = useNavigate();
+  
+  const handleStartCourse = () => {
+    navigate('/ourcourses');
+  };
   return (
     <div className="relative w-full">
       {/* Hero Section with Background Animation */}
@@ -54,6 +60,7 @@ const Home = () => {
                 <button 
                   className="bg-blue-600 hover:bg-blue-700 text-white px-7 sm:px-9 py-3 sm:py-4 rounded-lg transition-all duration-300 text-base sm:text-lg font-medium shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:shadow-[0_6px_16px_rgba(0,0,0,0.2)] transform hover:-translate-y-0.5"
                   style={{ borderRadius: '10px' }}
+                  onClick={handleStartCourse}
                 >
                   Start Course
                 </button>
@@ -291,7 +298,7 @@ const Home = () => {
             {/* Section Heading */}
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold text-gray-900 mb-3 underline decoration-2 underline-offset-4">
-                Bootcamp Programs
+                Bootcamp Internship Programs
               </h2>
               <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
                 Learn by building real projects through our hands-on workshops and internships.
@@ -383,8 +390,11 @@ const Home = () => {
             
             {/* View All Button */}
             <div className="text-center mt-10">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg">
-                Other Courses...
+              <button 
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-lg"
+                onClick={() => navigate('/internships')}
+              >
+                Other Internships...
               </button>
             </div>
           </div>
@@ -622,7 +632,7 @@ const Home = () => {
               ← Scroll to view more →
             </div>
           </div>
-          <style jsx>{`
+          <style jsx="true">{`
             .hide-scrollbar::-webkit-scrollbar {
               display: none; /* Hide scrollbar for Chrome, Safari and Opera */
             }

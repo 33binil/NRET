@@ -194,12 +194,12 @@ const AboutUs = () => {
                         <svg width="500" height="530" viewBox="0 0 335 356" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
                             <g filter="url(#filter0_d_336_36)">
                                 <g filter="url(#filter1_d_336_36)">
-                                    <path d="M26 86C26 52.8629 52.8629 26 86 26H301V262C301 295.137 274.137 322 241 322H26V86Z" fill="white" stroke="black" stroke-width="2"/>
+                                    <path d="M26 86C26 52.8629 52.8629 26 86 26H301V262C301 295.137 274.137 322 241 322H26V86Z" fill="white" stroke="black" strokeWidth="2"/>
                                 </g>
                             </g>
                             <defs>
-                                <filter id="filter0_d_336_36" x="0" y="0" width="335" height="356" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <filter id="filter0_d_336_36" x="0" y="0" width="335" height="356" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                     <feOffset dx="4" dy="4"/>
                                     <feGaussianBlur stdDeviation="15"/>
@@ -208,8 +208,8 @@ const AboutUs = () => {
                                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_336_36"/>
                                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_336_36" result="shape"/>
                                 </filter>
-                                <filter id="filter1_d_336_36" x="22" y="26" width="283" height="306" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <filter id="filter1_d_336_36" x="22" y="26" width="283" height="306" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                     <feOffset dy="6"/>
                                     <feGaussianBlur stdDeviation="2"/>
@@ -234,12 +234,12 @@ const AboutUs = () => {
                         <svg width="500" height="530" viewBox="0 0 335 356" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
                             <g filter="url(#filter0_d_336_36)">
                                 <g filter="url(#filter1_d_336_36)">
-                                    <path d="M26 86C26 52.8629 52.8629 26 86 26H301V262C301 295.137 274.137 322 241 322H26V86Z" fill="white" stroke="black" stroke-width="2"/>
+                                    <path d="M26 86C26 52.8629 52.8629 26 86 26H301V262C301 295.137 274.137 322 241 322H26V86Z" fill="white" stroke="black" strokeWidth="2"/>
                                 </g>
                             </g>
                             <defs>
-                                <filter id="filter0_d_336_36" x="0" y="0" width="335" height="356" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <filter id="filter0_d_336_36" x="0" y="0" width="335" height="356" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                     <feOffset dx="4" dy="4"/>
                                     <feGaussianBlur stdDeviation="15"/>
@@ -248,8 +248,8 @@ const AboutUs = () => {
                                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_336_36"/>
                                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_336_36" result="shape"/>
                                 </filter>
-                                <filter id="filter1_d_336_36" x="22" y="26" width="283" height="306" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <filter id="filter1_d_336_36" x="22" y="26" width="283" height="306" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                     <feOffset dy="6"/>
                                     <feGaussianBlur stdDeviation="2"/>
@@ -274,12 +274,12 @@ const AboutUs = () => {
                         <svg width="500" height="530" viewBox="0 0 335 356" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
                             <g filter="url(#filter0_d_336_36)">
                                 <g filter="url(#filter1_d_336_36)">
-                                    <path d="M26 86C26 52.8629 52.8629 26 86 26H301V262C301 295.137 274.137 322 241 322H26V86Z" fill="white" stroke="black" stroke-width="2"/>
+                                    <path d="M26 86C26 52.8629 52.8629 26 86 26H301V262C301 295.137 274.137 322 241 322H26V86Z" fill="white" stroke="black" strokeWidth="2"/>
                                 </g>
                             </g>
                             <defs>
-                                <filter id="filter0_d_336_36" x="0" y="0" width="335" height="356" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <filter id="filter0_d_336_36" x="0" y="0" width="335" height="356" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                     <feOffset dx="4" dy="4"/>
                                     <feGaussianBlur stdDeviation="15"/>
@@ -288,8 +288,8 @@ const AboutUs = () => {
                                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_336_36"/>
                                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_336_36" result="shape"/>
                                 </filter>
-                                <filter id="filter1_d_336_36" x="22" y="26" width="283" height="306" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <filter id="filter1_d_336_36" x="22" y="26" width="283" height="306" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                     <feOffset dy="6"/>
                                     <feGaussianBlur stdDeviation="2"/>
@@ -314,12 +314,12 @@ const AboutUs = () => {
                         <svg width="500" height="530" viewBox="0 0 335 356" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
                             <g filter="url(#filter0_d_336_36)">
                                 <g filter="url(#filter1_d_336_36)">
-                                    <path d="M26 86C26 52.8629 52.8629 26 86 26H301V262C301 295.137 274.137 322 241 322H26V86Z" fill="white" stroke="black" stroke-width="2"/>
+                                    <path d="M26 86C26 52.8629 52.8629 26 86 26H301V262C301 295.137 274.137 322 241 322H26V86Z" fill="white" stroke="black" strokeWidth="2"/>
                                 </g>
                             </g>
                             <defs>
-                                <filter id="filter0_d_336_36" x="0" y="0" width="335" height="356" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <filter id="filter0_d_336_36" x="0" y="0" width="335" height="356" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                     <feOffset dx="4" dy="4"/>
                                     <feGaussianBlur stdDeviation="15"/>
@@ -328,8 +328,8 @@ const AboutUs = () => {
                                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_336_36"/>
                                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_336_36" result="shape"/>
                                 </filter>
-                                <filter id="filter1_d_336_36" x="22" y="26" width="283" height="306" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <filter id="filter1_d_336_36" x="22" y="26" width="283" height="306" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
                                     <feOffset dy="6"/>
                                     <feGaussianBlur stdDeviation="2"/>
