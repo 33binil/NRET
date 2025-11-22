@@ -1,789 +1,590 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  FaUser, 
-  FaLock, 
-  FaBell, 
-  FaCheck, 
-  FaArrowLeft, 
-  FaBook, 
-  FaArrowRight, 
-  FaPlay,
-  FaBars,
-  FaTimes
-} from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
+import { FiUser, FiLock, FiBook, FiBell, FiClock, FiPlay, FiBookmark } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const Settings = () => {
-  const location = useLocation();
-  const [activeTab, setActiveTab] = useState('account');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  // Close mobile menu when route changes or window is resized
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      if (window.innerWidth >= 768) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Close mobile menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (windowWidth < 768 && isMobileMenuOpen && !e.target.closest('.settings-sidebar')) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isMobileMenuOpen, windowWidth]);
-
-  // Courses data from MyCourse component
-  const myCourses = [
-    {
-      id: 1,
-      title: 'UI/UX Design',
-      progress: 30,
-      lastAccessed: '1 week ago',
-      image: '/uiux-interface.png',
-      modulesCompleted: 3,
-      totalModules: 10,
-      category: 'Design',
-      duration: '10 weeks',
-      level: 'Intermediate',
-      instructor: 'Dr. Kareem Unisa (PhD)'
-    },
-    {
-      id: 2,
-      title: 'Full Stack Development',
-      progress: 15,
-      lastAccessed: '3 days ago',
-      image: '/fullstack-interface.png',
-      modulesCompleted: 2,
-      totalModules: 12,
-      category: 'Development',
-      duration: '12 weeks',
-      level: 'Advanced',
-      instructor: 'Dr. Kareem Unisa (PhD)'
-    }
-  ];
-
-  const [purchasedCourses] = useState(myCourses);
-
-  const [formData, setFormData] = useState({
-    // Account Section
-    profileImage: null,
-    name: 'John Doe',
-    email: 'john@example.com',
-    phone: '+1 (555) 123-4567',
-    gender: 'male',
-    dateOfBirth: '1990-01-01',
-    address: '123 Main St',
-    city: 'New York',
-    postalCode: '10001',
-    highestQualification: "Bachelor's Degree",
-    currentInstitution: 'XYZ University',
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
     
-    // Password Section
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
-    
-    // Notifications Section
-    emailNotifications: true,
-    courseUpdates: true,
-    promotional: false,
-  });
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData(prev => ({
-          ...prev,
-          profileImage: reader.result
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    const [activeTab, setActiveTab] = useState('profile');
+    const [profileData, setProfileData] = useState({
+        name: 'John Doe',
+        email: 'john@example.com',
+        phone: '+1 234 567 890',
+        gender: '',
+        dateOfBirth: '',
+        address: '',
+        city: '',
+        postalCode: '',
+        qualification: '',
+        institution: '',
+        bio: 'Web Developer & Designer',
+    });
+
+    const [passwordData, setPasswordData] = useState({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+    });
+
+    const [notifications, setNotifications] = useState({
+        email: true,
+        courseUpdates: true,
+        promotions: false,
+        news: true
+    });
+
+    // Import the courses data from MyCourse component
+    const courses = [
+        {
+            id: 1,
+            title: 'UI/UX Design Masterclass',
+            progress: 75,
+            lastAccessed: '1 week ago',
+            duration: '10 weeks',
+            level: 'Intermediate',
+            instructor: 'Dr. Kareem Unisa (PhD)',
+            modulesCompleted: 6,
+            totalModules: 8,
+            image: 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+            category: 'Design',
+            rating: 4.8,
+            students: 1245,
+            description: 'Master the principles of UI/UX design and create stunning user experiences.'
+        },
+        {
+            id: 2,
+            title: 'Full Stack Development Bootcamp',
+            progress: 30,
+            lastAccessed: '3 days ago',
+            duration: '12 weeks',
+            level: 'Advanced',
+            instructor: 'Dr. Sarah Johnson',
+            modulesCompleted: 3,
+            totalModules: 10,
+            image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1738&q=80',
+            category: 'Development',
+            rating: 4.9,
+            students: 2345,
+            description: 'Become a full-stack developer with our comprehensive bootcamp.'
+        },
+        {
+            id: 3,
+            title: 'Data Science Fundamentals',
+            progress: 90,
+            lastAccessed: '2 days ago',
+            duration: '8 weeks',
+            level: 'Beginner',
+            instructor: 'Prof. Michael Chen',
+            modulesCompleted: 9,
+            totalModules: 10,
+            image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80',
+            category: 'Data Science',
+            rating: 4.7,
+            students: 1890,
+            description: 'Learn the fundamentals of data science and machine learning.'
+        },
+        {
+            id: 4,
+            title: 'Digital Marketing Mastery',
+            progress: 10,
+            lastAccessed: 'Just now',
+            duration: '6 weeks',
+            level: 'All Levels',
+            instructor: 'Alex Rivera',
+            modulesCompleted: 1,
+            totalModules: 12,
+            image: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1704&q=80',
+            category: 'Marketing',
+            rating: 4.6,
+            students: 3200,
+            description: 'Master digital marketing strategies for business growth.'
+        }
+    ];
+
+    const handleProfileChange = (e) => {
+        const { name, value } = e.target;
+        setProfileData(prev => ({
+            ...prev,
+            [name]: value
         }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  const [saveStatus, setSaveStatus] = useState('');
+    };
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
+    const handlePasswordChange = (e) => {
+        const { name, value } = e.target;
+        setPasswordData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Simulate save action
-    setSaveStatus('Saving...');
-    setTimeout(() => {
-      setSaveStatus('Changes saved successfully!');
-      setTimeout(() => setSaveStatus(''), 3000);
-    }, 1000);
-  };
+    const handleNotificationToggle = (type) => {
+        setNotifications(prev => ({
+            ...prev,
+            [type]: !prev[type]
+        }));
+    };
 
-  // Tabs configuration
-  const tabs = [
-    { id: 'account', icon: <FaUser className="mr-3 flex-shrink-0" />, label: 'Account' },
-    { id: 'password', icon: <FaLock className="mr-3 flex-shrink-0" />, label: 'Password' },
-    { id: 'my-courses', icon: <FaBook className="mr-3 flex-shrink-0" />, label: 'My Courses' },
-    { id: 'notifications', icon: <FaBell className="mr-3 flex-shrink-0" />, label: 'Notifications' },
-  ];
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission here
+        alert('Settings saved successfully!');
+    };
 
-  return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Mobile header */}
-      <div className="md:hidden bg-white shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-3">
-            <div className="flex items-center">
-              <Link to="/" className="text-blue-600 hover:text-blue-800 mr-4">
-                <FaArrowLeft className="h-5 w-5" />
-              </Link>
-              <h1 className="text-xl font-bold text-gray-900">Settings</h1>
-            </div>
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-500 hover:text-gray-600 focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <FaTimes className="h-6 w-6" />
-              ) : (
-                <FaBars className="h-6 w-6" />
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
-        {/* Desktop header */}
-        <div className="hidden md:block mb-8">
-          <Link to="/" className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4">
-            <FaArrowLeft className="mr-2" />
-            <span>Back to Home</span>
-          </Link>
-          <h1 className="text-3xl font-bold text-gray-900">Account Settings</h1>
-          <p className="mt-2 text-sm text-gray-600">
-            Manage your account settings and preferences
-          </p>
-        </div>
-
-        <div className="bg-white shadow overflow-hidden rounded-lg flex flex-col md:flex-row relative h-[calc(100vh-12rem)] max-h-[800px] min-h-[600px]">
-          {/* Mobile Sidebar Overlay */}
-          {isMobileMenuOpen && (
-            <div 
-              className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden"
-              onClick={() => setIsMobileMenuOpen(false)}
-            ></div>
-          )}
-          
-          {/* Vertical Tabs - Responsive */}
-          <div 
-            className={`settings-sidebar w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-200 bg-white fixed md:static left-0 top-0 bottom-0 z-30 transform ${
-              isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-            } md:translate-x-0 transition-transform duration-300 ease-in-out overflow-y-auto`}
-            style={{
-              maxWidth: '16rem',
-              height: '100vh',
-              maxHeight: '100vh',
-              top: '0',
-              bottom: '0',
-              '@media (min-width: 768px)': {
-                height: 'calc(100vh - 8rem)',
-                maxHeight: '800px',
-                minHeight: '600px',
-                position: 'relative',
-                top: 'auto',
-                bottom: 'auto'
-              }
-            }}
-          >
-            <div className="p-4 md:p-0">
-              <div className="flex items-center justify-between p-4 md:hidden">
-                <h2 className="text-lg font-medium text-gray-900">Menu</h2>
-                <button
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  <FaTimes className="h-5 w-5" />
-                </button>
-              </div>
-              
-              <nav className="flex flex-col py-2">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => {
-                      setActiveTab(tab.id);
-                      if (windowWidth < 768) {
-                        setIsMobileMenuOpen(false);
-                      }
-                    }}
-                    className={`px-4 py-3 text-sm font-medium w-full text-left flex items-center ${
-                      activeTab === tab.id
-                        ? 'bg-blue-50 text-blue-600 border-r-2 border-blue-600'
-                        : 'text-gray-600 hover:bg-gray-100'
-                    }`}
-                  >
-                    {tab.icon}
-                    <span>{tab.label}</span>
-                  </button>
-                ))}
-              </nav>
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="flex-1 p-4 sm:p-6 w-full overflow-x-hidden overflow-y-auto">
-            {/* Mobile Tab Indicator */}
-            <div className="md:hidden mb-6">
-              <h2 className="text-xl font-semibold text-gray-900">
-                {tabs.find(tab => tab.id === activeTab)?.label}
-              </h2>
-            </div>
-            {activeTab === 'account' && (
-              <form onSubmit={handleSubmit}>
-                <div className="space-y-6">
-                  <div>
-                    <h2 className="text-lg font-medium text-gray-900">Profile Information</h2>
-                    <p className="mt-1 text-sm text-gray-500">Update your account's profile information and email address.</p>
-                  </div>
-
-                  {/* Profile Image Upload */}
-                  <div className="grid grid-cols-1 gap-y-5 gap-x-6 sm:grid-cols-6">
-                    <div className="sm:col-span-6">
-                      <div className="flex flex-col items-center mb-6">
-                        <div className="relative">
-                          <div className="h-32 w-32 rounded-full bg-gray-100 overflow-hidden border-4 border-white shadow-md">
-                            {formData.profileImage ? (
-                              <img 
-                                src={formData.profileImage} 
-                                alt="Profile" 
-                                className="h-full w-full object-cover"
-                              />
-                            ) : (
-                              <div className="h-full w-full flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-50">
-                                <FaUser className="h-16 w-16 text-blue-400" />
-                              </div>
-                            )}
-                          </div>
-                          <label 
-                            htmlFor="profile-upload"
-                            className="absolute -bottom-2 -right-2 bg-blue-600 text-white rounded-full p-2 cursor-pointer hover:bg-blue-700 transition-colors shadow-md"
-                            title="Change photo"
-                          >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                              <path fillRule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
-                            </svg>
-                            <input 
-                              id="profile-upload" 
-                              type="file" 
-                              className="hidden" 
-                              accept="image/*"
-                              onChange={handleImageChange}
-                            />
-                          </label>
+    const renderTabContent = () => {
+        switch (activeTab) {
+            case 'profile':
+                return (
+                    <div className="space-y-6">
+                        <div className="flex items-center space-x-4">
+                            <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center">
+                                <FiUser className="w-12 h-12 text-gray-400" />
+                            </div>
+                            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                Change Photo
+                            </button>
                         </div>
-                        <p className="mt-3 text-sm text-gray-500">Click the icon to change your photo</p>
-                      </div>
-                    </div>
-                    
-                    <div className="sm:col-span-6 md:col-span-3">
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                        Full Name
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          type="text"
-                          name="name"
-                          id="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-6 md:col-span-3">
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                        Email Address
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-6 md:col-span-3">
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
-                        Phone Number
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-6 md:col-span-3">
-                      <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
-                        Gender
-                      </label>
-                      <div className="mt-1">
-                        <select
-                          id="gender"
-                          name="gender"
-                          value={formData.gender}
-                          onChange={handleChange}
-                          className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        >
-                          <option value="male">Male</option>
-                          <option value="female">Female</option>
-                          <option value="other">Other</option>
-                          <option value="prefer-not-to-say">Prefer not to say</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-6 md:col-span-3">
-                      <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700">
-                        Date of Birth
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="dateOfBirth"
-                          name="dateOfBirth"
-                          type="date"
-                          value={formData.dateOfBirth}
-                          onChange={handleChange}
-                          className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-6">
-                      <label htmlFor="address" className="block text-sm font-medium text-gray-700">
-                        Address Line
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="address"
-                          name="address"
-                          type="text"
-                          value={formData.address}
-                          onChange={handleChange}
-                          className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                          placeholder="Street address"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-6 md:col-span-2">
-                      <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                        City
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="city"
-                          name="city"
-                          type="text"
-                          value={formData.city}
-                          onChange={handleChange}
-                          className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-6 md:col-span-2">
-                      <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700">
-                        Postal Code
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="postalCode"
-                          name="postalCode"
-                          type="text"
-                          value={formData.postalCode}
-                          onChange={handleChange}
-                          className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-6 md:col-span-3">
-                      <label htmlFor="highestQualification" className="block text-sm font-medium text-gray-700">
-                        Highest Qualification
-                      </label>
-                      <div className="mt-1">
-                        <select
-                          id="highestQualification"
-                          name="highestQualification"
-                          value={formData.highestQualification}
-                          onChange={handleChange}
-                          className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        >
-                          <option value="High School">High School</option>
-                          <option value="Associate's Degree">Associate's Degree</option>
-                          <option value="Bachelor's Degree">Bachelor's Degree</option>
-                          <option value="Master's Degree">Master's Degree</option>
-                          <option value="Doctorate">Doctorate</option>
-                          <option value="Other">Other</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-6">
-                      <label htmlFor="currentInstitution" className="block text-sm font-medium text-gray-700">
-                        Current College/School
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="currentInstitution"
-                          name="currentInstitution"
-                          type="text"
-                          value={formData.currentInstitution}
-                          onChange={handleChange}
-                          className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                          placeholder="Name of your current institution"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center pt-6 mt-8 border-t border-gray-200">
-                    <div className="mt-4 sm:mt-0">
-                      <span className={`inline-flex items-center text-sm ${saveStatus === 'Changes saved successfully!' ? 'text-green-600' : 'text-gray-500'}`}>
-                        {saveStatus && (
-                          <>
-                            {saveStatus === 'Changes saved successfully!' ? (
-                              <FaCheck className="mr-1.5 h-4 w-4 flex-shrink-0" />
-                            ) : null}
-                            <span>{saveStatus}</span>
-                          </>
-                        )}
-                      </span>
-                    </div>
-                    <button
-                      type="submit"
-                      className="inline-flex justify-center py-2.5 px-6 border border-transparent shadow-sm text-sm font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200 w-full sm:w-auto"
-                    >
-                      Save Changes
-                    </button>
-                  </div>
-                </div>
-              </form>
-            )}
-
-            {activeTab === 'my-courses' && (
-              <div className="space-y-6">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <h2 className="text-lg font-medium text-gray-900">My Learning</h2>
-                    <p className="mt-1 text-sm text-gray-500">Track your course progress and continue learning.</p>
-                  </div>
-                  <Link 
-                    to="/my-courses" 
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    View All Courses
-                    <FaArrowRight className="ml-2" />
-                  </Link>
-                </div>
-
-                {purchasedCourses && purchasedCourses.length > 0 ? (
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {purchasedCourses.map((course) => (
-                      <div key={course.id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-300">
-                        <div className="h-40 bg-gray-100 overflow-hidden">
-                          <img 
-                            src={course.image} 
-                            alt={course.title} 
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                        <div className="p-4">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-1">{course.title}</h3>
-                          <p className="text-sm text-gray-600 mb-2">
-                            {course.category} • {course.duration} • {course.level}
-                          </p>
-                          <p className="text-sm text-gray-600 mb-2">
-                            Instructor: {course.instructor}
-                          </p>
-                          <div className="mt-2">
-                            <div className="flex justify-between text-sm text-gray-600 mb-1">
-                              <span>Progress</span>
-                              <span className="font-medium">{course.progress}%</span>
+                        
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        value={profileData.name}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={profileData.email}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        value={profileData.phone}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                                    <select
+                                        name="gender"
+                                        value={profileData.gender}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    >
+                                        <option value="">Select Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                        <option value="prefer-not-to-say">Prefer not to say</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                                    <input
+                                        type="date"
+                                        name="dateOfBirth"
+                                        value={profileData.dateOfBirth}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <div className="md:col-span-2">
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Address Line</label>
+                                    <input
+                                        type="text"
+                                        name="address"
+                                        value={profileData.address}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        value={profileData.city}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Postal Code</label>
+                                    <input
+                                        type="text"
+                                        name="postalCode"
+                                        value={profileData.postalCode}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Highest Qualification</label>
+                                    <select
+                                        name="qualification"
+                                        value={profileData.qualification}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    >
+                                        <option value="">Select Qualification</option>
+                                        <option value="high-school">High School</option>
+                                        <option value="associate">Associate's Degree</option>
+                                        <option value="bachelor">Bachelor's Degree</option>
+                                        <option value="master">Master's Degree</option>
+                                        <option value="doctorate">Doctorate</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Current College/School</label>
+                                    <input
+                                        type="text"
+                                        name="institution"
+                                        value={profileData.institution}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <div className="md:col-span-2">
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                                    <textarea
+                                        name="bio"
+                                        value={profileData.bio}
+                                        onChange={handleProfileChange}
+                                        rows="3"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    ></textarea>
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={profileData.email}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                                    <input
+                                        type="tel"
+                                        name="phone"
+                                        value={profileData.phone}
+                                        onChange={handleProfileChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                                    <textarea
+                                        name="bio"
+                                        value={profileData.bio}
+                                        onChange={handleProfileChange}
+                                        rows="3"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    ></textarea>
+                                </div>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
-                              <div 
-                                className="bg-blue-600 h-2 rounded-full" 
-                                style={{ width: `${course.progress}%` }}
-                              ></div>
-                            </div>
-                            <div className="mt-2 flex justify-between text-xs text-gray-500">
-                              <span>{course.modulesCompleted} of {course.totalModules} modules</span>
-                              <span>Last: {course.lastAccessed}</span>
-                            </div>
-                          </div>
-                          <div className="mt-4">
-                            <Link
-                              to={`/courses/${course.id}`}
-                              className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            <button
+                                type="submit"
+                                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                             >
-                              {course.progress > 0 ? 'Continue Learning' : 'Start Learning'}
-                              <FaArrowRight className="ml-2" />
-                            </Link>
-                          </div>
+                                Save Changes
+                            </button>
+                        </form>
+                    </div>
+                );
+            
+            case 'password':
+                return (
+                    <div className="max-w-lg">
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                                <input
+                                    type="password"
+                                    name="currentPassword"
+                                    value={passwordData.currentPassword}
+                                    onChange={handlePasswordChange}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                                <input
+                                    type="password"
+                                    name="newPassword"
+                                    value={passwordData.newPassword}
+                                    onChange={handlePasswordChange}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                                <input
+                                    type="password"
+                                    name="confirmPassword"
+                                    value={passwordData.confirmPassword}
+                                    onChange={handlePasswordChange}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    required
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                            >
+                                Update Password
+                            </button>
+                        </form>
+                    </div>
+                );
+            
+            case 'courses':
+                return (
+                    <div className="space-y-6">
+                        <div className="flex justify-between items-center">
+                            <h3 className="text-lg font-semibold text-gray-800">My Learning</h3>
+                            <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
+                                View All Courses
+                            </button>
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-12 bg-white rounded-lg border-2 border-dashed border-gray-300">
-                    <FaBook className="mx-auto h-12 w-12 text-gray-400" />
-                    <h3 className="mt-2 text-sm font-medium text-gray-900">No courses yet</h3>
-                    <p className="mt-1 text-sm text-gray-500">Get started by exploring our courses.</p>
-                    <div className="mt-6">
-                      <Link
-                        to="/ourcourses"
-                        className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                      >
-                        Browse Available Courses
-                      </Link>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {courses.map(course => (
+                                <div key={course.id} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow">
+                                    <div className="h-32 overflow-hidden">
+                                        <img 
+                                            src={course.image} 
+                                            alt={course.title} 
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                    <div className="p-5">
+                                        <div className="flex justify-between items-start mb-3">
+                                            <h4 className="text-lg font-semibold text-gray-900">{course.title}</h4>
+                                            <button className="text-gray-400 hover:text-blue-500">
+                                                <FiBookmark className="w-5 h-5" />
+                                            </button>
+                                        </div>
+                                        <div className="flex items-center text-sm text-gray-500 mb-4">
+                                            <FiClock className="w-4 h-4 mr-1" />
+                                            <span className="mr-3">{course.duration}</span>
+                                            <span className="px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full text-xs">
+                                                {course.level}
+                                            </span>
+                                        </div>
+                                        <div className="text-sm text-gray-500 mb-4">
+                                            Instructor: <span className="text-gray-700">{course.instructor}</span>
+                                        </div>
+                                        <div className="mb-3">
+                                            <div className="flex justify-between text-sm text-gray-500 mb-1">
+                                                <span>Progress</span>
+                                                <span>{course.progress}%</span>
+                                            </div>
+                                            <div className="w-full bg-gray-200 rounded-full h-2">
+                                                <div 
+                                                    className="bg-blue-600 h-2 rounded-full" 
+                                                    style={{ width: `${course.progress}%` }}
+                                                ></div>
+                                            </div>
+                                        </div>
+                                        <div className="flex justify-between text-sm text-gray-500 mb-4">
+                                            <span>{course.modulesCompleted} of {course.totalModules} modules</span>
+                                            <span>Last accessed: {course.lastAccessed}</span>
+                                        </div>
+                                        <button className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors flex items-center justify-center">
+                                            <FiPlay className="w-4 h-4 mr-2" />
+                                            Continue Learning
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {activeTab === 'notifications' && (
-              <form onSubmit={handleSubmit}>
-                <div className="space-y-6">
-                  <div>
-                    <h2 className="text-lg font-medium text-gray-900">Notification Preferences</h2>
-                    <p className="mt-1 text-sm text-gray-500">
-                      Control how you receive notifications.
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex items-start">
-                      <div className="flex items-center h-5">
-                        <input
-                          id="emailNotifications"
-                          name="emailNotifications"
-                          type="checkbox"
-                          checked={formData.emailNotifications}
-                          onChange={handleChange}
-                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                        />
-                      </div>
-                      <div className="ml-3 text-sm">
-                        <label htmlFor="emailNotifications" className="font-medium text-gray-700">
-                          Email Notifications
-                        </label>
-                        <p className="text-gray-500">Receive email notifications about your account.</p>
-                      </div>
+                );
+            
+            case 'notifications':
+                return (
+                    <div className="space-y-6">
+                        <div className="space-y-4">
+                            <h3 className="text-lg font-medium text-gray-900">Email Notifications</h3>
+                            {Object.entries({
+                                email: 'Account notifications',
+                                courseUpdates: 'Course updates',
+                                promotions: 'Promotions and offers',
+                                news: 'News and announcements'
+                            }).map(([key, label]) => (
+                                <div key={key} className="flex items-center justify-between">
+                                    <span className="text-gray-700">{label}</span>
+                                    <button
+                                        onClick={() => handleNotificationToggle(key)}
+                                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                                            notifications[key] ? 'bg-blue-600' : 'bg-gray-200'
+                                        }`}
+                                    >
+                                        <span
+                                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                                notifications[key] ? 'translate-x-6' : 'translate-x-1'
+                                            }`}
+                                        />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                        
+                        <div className="pt-4 border-t border-gray-200">
+                            <h3 className="text-lg font-medium text-gray-900 mb-4">Notification Preferences</h3>
+                            <div className="space-y-4">
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="pushNotifications"
+                                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                    />
+                                    <label htmlFor="pushNotifications" className="ml-2 block text-sm text-gray-700">
+                                        Enable push notifications
+                                    </label>
+                                </div>
+                                <div className="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        id="emailDigest"
+                                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                                        defaultChecked
+                                    />
+                                    <label htmlFor="emailDigest" className="ml-2 block text-sm text-gray-700">
+                                        Receive weekly email digest
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="pt-4">
+                            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                Save Notification Preferences
+                            </button>
+                        </div>
                     </div>
+                );
+            
+            default:
+                return null;
+        }
+    };
 
-                    <div className="flex items-start">
-                      <div className="flex items-center h-5">
-                        <input
-                          id="courseUpdates"
-                          name="courseUpdates"
-                          type="checkbox"
-                          checked={formData.courseUpdates}
-                          onChange={handleChange}
-                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                        />
-                      </div>
-                      <div className="ml-3 text-sm">
-                        <label htmlFor="courseUpdates" className="font-medium text-gray-700">
-                          Course Updates
-                        </label>
-                        <p className="text-gray-500">Get notified about new courses and updates.</p>
-                      </div>
+    const tabs = [
+        { id: 'profile', icon: <FiUser className="mr-2 h-4 w-4" />, label: 'Profile' },
+        { id: 'password', icon: <FiLock className="mr-2 h-4 w-4" />, label: 'Password' },
+        { id: 'courses', icon: <FiBook className="mr-2 h-4 w-4" />, label: 'Courses' },
+        { id: 'notifications', icon: <FiBell className="mr-2 h-4 w-4" />, label: 'Notifications' },
+    ];
+
+    return (
+        <div className="min-h-screen bg-gray-50 flex flex-col">
+            <Navbar />
+
+            {/* Main Content */}
+            <div className="flex-1 flex items-center justify-center pt-16 pb-8 px-4 sm:px-6 lg:px-8">
+                <div className="w-full max-w-6xl">
+                    <div className="bg-white rounded-xl shadow-md overflow-hidden">
+                        <div className="md:flex min-h-[600px]">
+                            {/* Sidebar - Hidden on mobile, shown on medium screens and up */}
+                            <div className="hidden md:flex md:flex-col md:w-64 bg-gray-800 text-white p-6">
+                                <h2 className="text-2xl font-bold mb-8">Settings</h2>
+                                <nav className="space-y-1 flex-1">
+                                    {tabs.map((tab) => (
+                                        <button
+                                            key={tab.id}
+                                            onClick={() => setActiveTab(tab.id)}
+                                            className={`w-full text-left flex items-center px-4 py-3 text-base font-medium rounded-lg transition-colors ${
+                                                activeTab === tab.id 
+                                                    ? 'bg-blue-700 text-white' 
+                                                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                                            }`}
+                                        >
+                                            {tab.icon}
+                                            {tab.label}
+                                        </button>
+                                    ))}
+                                </nav>
+                            </div>
+                            
+                            {/* Mobile Tab Selector - Only shown on mobile */}
+                            <div className="md:hidden mb-4 bg-white sticky top-16 z-10 border-b border-gray-200">
+                                <div className="flex overflow-x-auto py-2 px-1">
+                                    <div className="flex space-x-2">
+                                        {tabs.map((tab) => (
+                                            <button
+                                                key={tab.id}
+                                                onClick={() => setActiveTab(tab.id)}
+                                                className={`flex items-center px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap ${
+                                                    activeTab === tab.id
+                                                        ? 'bg-blue-600 text-white'
+                                                        : 'text-gray-700 hover:bg-gray-100'
+                                                }`}
+                                            >
+                                                {tab.icon}
+                                                <span>{tab.label}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {/* Main Content */}
+                            <div className="flex-1 p-4 sm:p-6 md:p-8">
+                                <div className="mb-6">
+                                    <h1 className="text-xl sm:text-2xl font-bold text-gray-900">
+                                        {activeTab === 'profile' && 'Profile Settings'}
+                                        {activeTab === 'password' && 'Change Password'}
+                                        {activeTab === 'courses' && 'My Courses'}
+                                        {activeTab === 'notifications' && 'Notification Settings'}
+                                    </h1>
+                                    <p className="mt-1 text-sm text-gray-500">
+                                        {activeTab === 'profile' && 'Update your profile information and photo'}
+                                        {activeTab === 'password' && 'Change your password to secure your account'}
+                                        {activeTab === 'courses' && 'View and manage your enrolled courses'}
+                                        {activeTab === 'notifications' && 'Manage your notification preferences'}
+                                    </p>
+                                </div>
+                                
+                                <div className="bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
+                                    {renderTabContent()}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div className="flex items-start">
-                      <div className="flex items-center h-5">
-                        <input
-                          id="promotional"
-                          name="promotional"
-                          type="checkbox"
-                          checked={formData.promotional}
-                          onChange={handleChange}
-                          className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                        />
-                      </div>
-                      <div className="ml-3 text-sm">
-                        <label htmlFor="promotional" className="font-medium text-gray-700">
-                          Promotional Offers
-                        </label>
-                        <p className="text-gray-500">Receive promotional offers and discounts.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-end">
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    >
-                      Save Preferences
-                    </button>
-                  </div>
                 </div>
-              </form>
-            )}
-
-            {activeTab === 'password' && (
-              <form onSubmit={handleSubmit}>
-                <div className="space-y-6">
-                  <div>
-                    <h2 className="text-lg font-medium text-gray-900">Update Password</h2>
-                    <p className="mt-1 text-sm text-gray-500">
-                      Ensure your account is using a long, random password to stay secure.
-                    </p>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div>
-                      <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700">
-                        Current Password
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="currentPassword"
-                          name="currentPassword"
-                          type="password"
-                          autoComplete="current-password"
-                          required
-                          className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">
-                        New Password
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="newPassword"
-                          name="newPassword"
-                          type="password"
-                          autoComplete="new-password"
-                          required
-                          className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                        Confirm New Password
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          id="confirmPassword"
-                          name="confirmPassword"
-                          type="password"
-                          autoComplete="new-password"
-                          required
-                          className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                        />
-                      </div>
-                    </div>
-                    <div className="pt-5">
-                      <div className="flex justify-end">
-                        <button
-                          type="button"
-                          className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          type="submit"
-                          className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                        >
-                          Update Password
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-
-        {saveStatus && (
-          <div className="mt-4 p-4 bg-green-50 rounded-md">
-            <div className="flex">
-              <div className="flex-shrink-0">
-                <FaCheck className="h-5 w-5 text-green-400" aria-hidden="true" />
-              </div>
-              <div className="ml-3">
-                <p className="text-sm font-medium text-green-800">{saveStatus}</p>
-              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
-
-// Add custom styles for better mobile experience
-const styles = `
-  @media (max-width: 767px) {
-    .settings-sidebar {
-      box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1), 2px 0 4px -1px rgba(0, 0, 0, 0.06);
-    }
-  }
-  
-  /* Improve touch targets */
-  @media (pointer: coarse) {
-    button, [role="button"], input[type="submit"], input[type="button"], .btn {
-      min-height: 44px;
-      min-width: 44px;
-    }
-    
-    input, select, textarea {
-      font-size: 16px; /* Prevents iOS zoom on focus */
-    }
-  }
-`;
-
-// Add styles to the document head
-const styleElement = document.createElement('style');
-styleElement.textContent = styles;
-document.head.appendChild(styleElement);
 
 export default Settings;

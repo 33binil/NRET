@@ -85,7 +85,7 @@ const InternshipDetails = () => {
         <div className="min-h-screen bg-[#f5f5f0] font-sans">
             {/* Top Bar - Same as Internships page */}
             <div className="w-full bg-white shadow-sm">
-                <div className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+                <div className="container mx-auto px-4 sm:px-6 py-5 sm:py-6">
                     <div className="flex items-center justify-between">
                         <Link to="/internships" className="inline-flex items-center text-gray-600 hover:text-gray-800 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -236,9 +236,31 @@ const InternshipDetails = () => {
             </div>
 
             {/* Footer */}
-            <footer className="bg-white py-6 mt-12">
-                <div className="container mx-auto px-4 text-center text-gray-500 text-sm">
-                    © {new Date().getFullYear()} Nano Robotics Embed Technologies. All rights reserved.
+            <footer className="mt-auto bg-white/90 backdrop-blur-md border-t border-gray-100 py-6 sm:py-8">
+                <div className="container mx-auto px-4 sm:px-6">
+                    <div className="flex flex-col sm:flex-row justify-between items-center">
+                        <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3 mb-4 sm:mb-0">
+                            <div className="h-12 sm:h-14 md:h-14 w-auto flex items-center">
+                                <img 
+                                    src="/nret-logo.png" 
+                                    alt="NRET Logo"
+                                    className="h-full w-auto max-w-[120px] sm:max-w-[140px] md:max-w-[160px] object-contain"
+                                />
+                            </div>
+                            <span className="text-xs sm:text-sm text-gray-500 text-center sm:text-left">Lifelong Learning Platform</span>
+                        </div>
+                        <div className="flex flex-wrap justify-center gap-x-4 sm:gap-x-6 gap-y-2 text-center">
+                            <Link to="/about" className="text-xs xs:text-sm text-gray-500 hover:text-blue-600 transition-colors px-1">About</Link>
+                            <Link to="/contact" className="text-xs xs:text-sm text-gray-500 hover:text-blue-600 transition-colors px-1">Contact</Link>
+                            <Link to="/privacy" className="text-xs xs:text-sm text-gray-500 hover:text-blue-600 transition-colors px-1">Privacy</Link>
+                            <Link to="/terms" className="text-xs xs:text-sm text-gray-500 hover:text-blue-600 transition-colors px-1">Terms</Link>
+                        </div>
+                    </div>
+                    <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-100 text-center sm:text-left">
+                        <p className="text-xs text-gray-500">
+                            &copy; {new Date().getFullYear()} Nano Robotics Embed Technologies. All rights reserved.
+                        </p>
+                    </div>
                 </div>
             </footer>
         </div>
